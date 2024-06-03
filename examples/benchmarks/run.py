@@ -18,22 +18,13 @@ def main(env: str, algo: str, seed: int):
     eg.add("logger_cfgs:use_tensorboard", [True])
     eg.add("train_cfgs:vector_env_nums", [1])
     eg.add("train_cfgs:torch_threads", [1])
-    eg.add("algo_cfgs:steps_per_epoch", [5000])
-    eg.add("train_cfgs:total_steps", [1000000])
+    eg.add("algo_cfgs:steps_per_epoch", [2000])
+    eg.add("train_cfgs:total_steps", [300000])
     eg.add("seed", [seed])
 
     # total experiment num must can be divided by num_pool
     # meanwhile, users should decide this value according to their machine
     eg.run(train, num_pool=1, gpu_id=gpu_id)
-
-    # just fill in the name of the parameter of which value you want to compare.
-    # then you can specify the value of the parameter you want to compare,
-    # or you can just specify how many values you want to compare in single graph at most,
-    # and the function will automatically generate all possible combinations of the graph.
-    # but the two mode can not be used at the same time.
-    eg.analyze(parameter="env_id", values=None, compare_num=6, cost_limit=25)
-    eg.render(num_episodes=1, render_mode="rgb_array", width=256, height=256)
-    eg.evaluate(num_episodes=5)
 
 
 if __name__ == "__main__":

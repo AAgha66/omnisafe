@@ -16,7 +16,7 @@
 
 
 from __future__ import annotations
-
+import clearml
 import os
 import string
 import sys
@@ -75,6 +75,7 @@ def train(
         env_id (str): The name of test environment.
         custom_cfgs (Config): Custom configurations.
     """
+    clearml.Task.init()
     terminal_log_name = 'terminal.log'
     error_log_name = 'error.log'
     if 'seed' in custom_cfgs:

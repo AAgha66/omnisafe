@@ -316,14 +316,6 @@ class Logger:  # pylint: disable=too-many-instance-attributes
                 for key, val in self._current_row.items():
                     self._tensorboard_writer.add_scalar(key, val, global_step=self._epoch)
                 self._tensorboard_writer.flush()
-            for key, val in self._current_row.items():
-                self.task_logger.report_scalar(
-                title=key,
-                series=key,
-                value=val,
-                iteration=self._epoch,
-            )
-
             if self._use_wandb:
                 wandb.log(self._current_row, step=self._epoch)
             self._console.print(table)

@@ -5,7 +5,7 @@ from omnisafe.common.experiment_grid import ExperimentGrid
 from omnisafe.utils.exp_grid_tools import train
 
 
-def main(env: str, algo: str, seed: int):
+def main(env: str, algo: str, seed: int, n_env_steps: int):
     eg = ExperimentGrid(exp_name="Benchmark_Safety_Velocity")
     mujoco_envs = [env]
 
@@ -19,7 +19,7 @@ def main(env: str, algo: str, seed: int):
     eg.add("train_cfgs:vector_env_nums", [1])
     eg.add("train_cfgs:torch_threads", [1])
     eg.add("algo_cfgs:steps_per_epoch", [2000])
-    eg.add("train_cfgs:total_steps", [300000])
+    eg.add("train_cfgs:total_steps", [n_env_steps])
     eg.add("seed", [seed])
 
     # total experiment num must can be divided by num_pool
@@ -37,4 +37,5 @@ if __name__ == "__main__":
         seed=d["seed"],
         env=d["env"],
         algo=d["algo"],
+        n_env_steps=d["n_env_steps"],
     )

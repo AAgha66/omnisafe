@@ -1,9 +1,12 @@
 #!/bin/bash
 echo "Running setup script."
 source /root/venv/bin/activate
-pip install clearml
+
 # go to the repo directory
 cd $CLEARML_GIT_ROOT
+# install local omnisafe
+pip install -e .
+pip install clearml
 
 # now we need to tell clearml to use the python from our poetry env
 # this is in the general case (we use the system python above, so we could

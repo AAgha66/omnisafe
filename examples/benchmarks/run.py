@@ -31,22 +31,19 @@ def main(env: str, algo: str, seed: int):
     # or you can just specify how many values you want to compare in single graph at most,
     # and the function will automatically generate all possible combinations of the graph.
     # but the two mode can not be used at the same time.
-    # eg.analyze(parameter="env_id", values=None, compare_num=6, cost_limit=25)
-    # eg.render(num_episodes=1, render_mode="rgb_array", width=256, height=256)
-    # eg.evaluate(num_episodes=5)
+    eg.analyze(parameter="env_id", values=None, compare_num=6, cost_limit=25)
+    eg.render(num_episodes=1, render_mode="rgb_array", width=256, height=256)
+    eg.evaluate(num_episodes=5)
 
 
 if __name__ == "__main__":
-    # task = clearml.Task.init()
-    # task_logger = task.get_logger()
-    # task_params = task.get_parameters_as_dict(cast=True)
-    # d = task_params["internal"]
-    # print(d)
+    task = clearml.Task.init()
+    task_logger = task.get_logger()
+    task_params = task.get_parameters_as_dict(cast=True)
+    d = task_params["internal"]
+    print(d)
     main(
-        # seed=d["seed"],
-        # env=d["env"],
-        # algo=d["algo"],
-        seed=0,
-        env="SafetyHalfCheetahVelocity-v1",
-        algo="SACLag",
+        seed=d["seed"],
+        env=d["env"],
+        algo=d["algo"],
     )

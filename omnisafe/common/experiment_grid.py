@@ -466,9 +466,9 @@ class ExperimentGrid:
             results.append(pool.submit(thunk, str(idx), var['algo'], var['env_id'], var))
         pool.shutdown()
 
-        #if not is_test:
-            #self.save_results(exp_names, variants, results)
-        #self._init_statistical_tools()
+        if not is_test:
+            self.save_results(exp_names, variants, results)
+        self._init_statistical_tools()
 
     def save_results(
         self,

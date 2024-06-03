@@ -22,7 +22,6 @@ import os
 import time
 from collections import deque
 from typing import Any, TextIO
-import clearml
 
 import numpy as np
 import torch
@@ -134,8 +133,6 @@ class Logger:  # pylint: disable=too-many-instance-attributes
         if self._use_tensorboard and self._maste_proc:
             self._tensorboard_writer = SummaryWriter(log_dir=self._log_dir)
 
-        task = clearml.Task.init()
-        self.clearml_logger = task.get_logger()
         if self._use_wandb and self._maste_proc:  # pragma: no cover
             project: str = self._config.logger_cfgs.get('wandb_project', 'omnisafe')
             name: str = f'{exp_name}-{relpath}'

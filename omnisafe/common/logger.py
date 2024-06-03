@@ -99,7 +99,7 @@ class Logger:  # pylint: disable=too-many-instance-attributes
             relpath = f'seed-{str(seed).zfill(3)}-{relpath}'
 
         self._hms_time: str = hms_time
-        self._log_dir: str = os.path.join(output_dir, exp_name, relpath)
+        self._log_dir: str = output_dir
         self._maste_proc: bool = get_rank() == 0
         self._console: Console = Console()
 
@@ -131,7 +131,7 @@ class Logger:  # pylint: disable=too-many-instance-attributes
         self._use_wandb: bool = use_wandb
 
         if self._use_tensorboard and self._maste_proc:
-            self._tensorboard_writer = SummaryWriter(log_dir=os.path.join(self._log_dir, 'tb'))
+            self._tensorboard_writer = SummaryWriter(log_dir=self._log_dir)
 
         if self._use_wandb and self._maste_proc:  # pragma: no cover
             project: str = self._config.logger_cfgs.get('wandb_project', 'omnisafe')

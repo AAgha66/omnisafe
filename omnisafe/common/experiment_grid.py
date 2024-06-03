@@ -413,7 +413,7 @@ class ExperimentGrid:
             gpu_id (list of int or None, optional): List of GPU IDs to use. Defaults to None.
         """
         if parent_dir is None:
-            self.log_dir = os.path.join('./', 'exp-x', self.name)
+            self.log_dir = os.path.join('./', self.name)
         else:
             self.log_dir = os.path.join(parent_dir, self.name)
         assert_with_exit(
@@ -458,7 +458,7 @@ class ExperimentGrid:
             exp_name = recursive_dict2json(clean_var)
             hashed_exp_name = var['env_id'][:30] + '---' + hash_string(exp_name)
             exp_names.append(':'.join((hashed_exp_name[:5], exp_name)))
-            exp_log_dir = os.path.join(self.log_dir, hashed_exp_name, '')
+            exp_log_dir = self.log_dir
             if not var.get('logger_cfgs'):
                 var['logger_cfgs'] = {'log_dir': './exp'}
             var['logger_cfgs'].update({'log_dir': exp_log_dir})

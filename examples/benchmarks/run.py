@@ -24,8 +24,7 @@ def main(env: str, algo: str, seed: int):
 
     # total experiment num must can be divided by num_pool
     # meanwhile, users should decide this value according to their machine
-    path = pathlib.Path().resolve()._str
-    eg.run(train, num_pool=1, gpu_id=gpu_id, parent_dir=path)
+    eg.run(train, num_pool=1, gpu_id=gpu_id)
 
     # just fill in the name of the parameter of which value you want to compare.
     # then you can specify the value of the parameter you want to compare,
@@ -38,15 +37,15 @@ def main(env: str, algo: str, seed: int):
 
 
 if __name__ == "__main__":
-    #task = clearml.Task.init()
-    #task_logger = task.get_logger()
-    #task_params = task.get_parameters_as_dict(cast=True)
-    #d = task_params["internal"]
-    #print(d)
+    # task = clearml.Task.init()
+    # task_logger = task.get_logger()
+    # task_params = task.get_parameters_as_dict(cast=True)
+    # d = task_params["internal"]
+    # print(d)
     main(
-        #seed=d["seed"],
-        #env=d["env"],
-        #algo=d["algo"],
+        # seed=d["seed"],
+        # env=d["env"],
+        # algo=d["algo"],
         seed=0,
         env="SafetyHalfCheetahVelocity-v1",
         algo="SACLag",
